@@ -1,0 +1,402 @@
+{
+    "Name": "Contoso Travel",
+    "TerraformLocation": {
+        "Repo": "https://github.com/andywahr/arkhitekton-modules.git",
+        "Branch": "master",
+        "BuildYaml": "Terraform/ContosoTravel/build.yaml"
+    },
+    "LoadTest": {
+        "Repo": "https://github.com/andywahr/arkhitekton-modules.git",
+        "Branch": "master",
+        "BuildYaml": "Terraform/ContosoTravel/loadTestBuild.yaml"
+    },
+    "DevOpsPlugin": [
+        {
+            "Publisher": "petergroenewegen",
+            "Id": "PeterGroenewegen-Xpirit-Vsts-Release-Terraform"
+        },
+        {
+            "Publisher": "qetza",
+            "Id": "replacetokens"
+        }
+    ],
+    "Categories": [
+        {
+            "Title": "Base",
+            "Id": "base",
+            "Choose": "All",
+            "Services": [
+                {
+                    "Title": "Azure DevOps",
+                    "Image": "vs.png",
+                    "Id": "vsts",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Log Analytics",
+                    "Image": "log-analytics.png",
+                    "Id": "loganalytics",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "App Insights",
+                    "Image": "app-insights.png",
+                    "Id": "appinsights",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Key Vault",
+                    "Image": "keyvault.png",
+                    "Id": "keyvault",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Storage",
+                    "Image": "storage.png",
+                    "Id": "storage",
+                    "IsAvailable": true
+                }
+            ]
+        },
+        {
+            "Title": "Front End Networking",
+            "Id": "front-end-networking",
+            "Choose": "Any",
+            "Services": [
+                {
+                    "Title": "Content Delivery Network",
+                    "Id": "cdn",
+                    "Image": "cdn.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Traffic Manager",
+                    "Id": "trafficmanager",
+                    "Image": "traffic-mgr.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Firewall",
+                    "Id": "firewall",
+                    "Image": "firewall.png",
+                    "IsAvailable": false
+                },
+                {
+                    "Title": "Application Gateway",
+                    "Id": "appgateway",
+                    "Image": "app-gateway.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "API Management",
+                    "Id": "apimgmt",
+                    "Image": "api-mgmt.png"
+                }
+            ]
+        },
+        {
+            "Title": "Web",
+            "Id": "web",
+            "Choose": "One",
+            "Services": [
+                {
+                    "Title": "App Service",
+                    "Id": "appservice",
+                    "Image": "appservice.png",
+                    "IsAvailable": true,
+                    "Platforms": [
+                        {
+                            "Title": ".Net Core",
+                            "Id": "webcore",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/web-core-build.yaml"
+                        },
+                        {
+                            "Title": ".Net Framework",
+                            "Id": "webfull",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/web-full-build.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "Id": "webnode",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "web-nodejs-build.yaml"
+                        }
+                    ],
+                    "GeneralDeployJson": "https://raw.githubusercontent.com/andywahr/arkhitekton-modules/master/ContosoTravel/web/appservice/cd.json"
+                },
+                {
+                    "Title": "Kubernetes",
+                    "Id": "websitekubernetes",
+                    "Image": "kubernetes.png",
+                    "IsAvailable": true,
+                    "RequiresServicePricinpal": true,
+                    "Platforms": [
+                        {
+                            "Title": ".Net Core",
+                            "Id": "webkubcore",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/web-core-kubernetes.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "Id": "webkubnode",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "/build-web-container.yaml"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Web Site (IaaS)",
+                    "Id": "websiteiaas",
+                    "Image": "vm.png",
+                    "IsAvailable": false
+                },
+                {
+                    "Title": "Service Fabric",
+                    "Id": "websiteservicefabric",
+                    "Image": "service-fabric.png"
+                }
+            ]
+        },
+        {
+            "Title": "Transport",
+            "Id": "eventing",
+            "Choose": "One",
+            "Services": [
+                {
+                    "Title": "Monolith",
+                    "Id": "monolith",
+                    "Image": "monolith.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Web Service (HTTP)",
+                    "Id": "http",
+                    "Image": "http.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Service Bus",
+                    "Id": "servicebus",
+                    "Image": "service-bus.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Event Grid",
+                    "Id": "eventgrid",
+                    "Image": "event-grid.png",
+                    "IsAvailable": false
+                }
+            ]
+        },
+        {
+            "Title": "Backend",
+            "Id": "backend",
+            "Choose": "One",
+            "Services": [
+                {
+                    "Title": "Functions",
+                    "Id": "functions",
+                    "Image": "functions.png",
+                    "IsAvailable": true,
+                    "Platforms": [
+                        {
+                            "Title": ".Net Core",
+                            "DependsOn": "servicebus",
+                            "Id": "servicescoreservicebus",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/services-core-serviceBus-build.yaml"
+                        },
+                        {
+                            "Title": ".Net Core",
+                            "DependsOn": "eventgrid",
+                            "Id": "servicescoreeventgrid",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/services-core-eventGrid-build.yaml"
+                        },
+                        {
+                            "Title": ".Net Core",
+                            "DependsOn": "http",
+                            "Id": "servicescorehttp",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/services-core-eventGrid-build.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "DependsOn": "servicebus",
+                            "Id": "servicesnodeservicebus",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "services-nodejs-serviceBus.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "DependsOn": "eventgrid",
+                            "Id": "servicesnodeeventgrid",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "services-nodejs-eventGrid.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "DependsOn": "http",
+                            "Id": "servicesnodehttp",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "services-nodejs-eventGrid.yaml"
+                        }
+                    ],
+                    "GeneralDeployJson": "https://raw.githubusercontent.com/andywahr/arkhitekton-modules/master/ContosoTravel/backend/functions/cd.json"
+                },
+                {
+                    "Title": "Kubernetes",
+                    "Id": "kubernetes",
+                    "Image": "kubernetes.png",
+                    "IsAvailable": true,
+                    "Platforms": [
+                        {
+                            "Title": ".Net Core",
+                            "Id": "servicescorekubeservicebus",
+                            "DependsOn": "servicebus",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/services-core-kubernetes-build.yaml"
+                        },
+                        {
+                            "Title": ".Net Core",
+                            "Id": "servicescorekubeservicebus",
+                            "DependsOn": "eventgrid",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/services-core-kubernetes-build.yaml"
+                        },
+                        {
+                            "Title": ".Net Core",
+                            "Id": "servicescorekubeservicebus",
+                            "DependsOn": "http",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/services-core-kubernetes-build.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "Id": "servicesnodekubeservicebus",
+                            "DependsOn": "servicebus",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "/build-services-container.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "Id": "servicesnodekubeservicebus",
+                            "DependsOn": "eventgrid",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "/build-services-container.yaml"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "Id": "servicesnodekubeservicebus",
+                            "DependsOn": "http",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "/build-services-container.yaml"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Services (IaaS)",
+                    "Id": "servicesiaas",
+                    "Image": "vm.png"
+                },
+                {
+                    "Title": "Service Fabric",
+                    "Id": "servicesservicefabric",
+                    "Image": "service-fabric.png"
+                }
+            ]
+        },
+        {
+            "Title": "Data",
+            "Id": "data",
+            "Choose": "One",
+            "Services": [
+                {
+                    "Title": "SQL Database",
+                    "Id": "sql",
+                    "Image": "sql.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Cosmos DB",
+                    "Id": "cosmos",
+                    "Image": "cosmos.png",
+                    "IsAvailable": true
+                },
+                {
+                    "Title": "Azure Database for MySQL",
+                    "Id": "mysql",
+                    "Image": "mysql.png",
+                    "IsAvailable": true
+                }
+            ]
+        },
+        {
+            "Title": "Optional",
+            "Id": "optional",
+            "Choose": "Any",
+            "Services": [
+                {
+                    "Title": "Mobile App",
+                    "Id": "mobile",
+                    "Image": "mobile.png"
+                },
+                {
+                    "Title": "Active Directory B2C",
+                    "Id": "adb2c",
+                    "Image": "ad.png"
+                },
+                {
+                    "Title": "Stream Analytics",
+                    "Id": "streamanalytics",
+                    "Image": "stream-analytics.png"
+                },
+                {
+                    "Title": "Cognitive Services",
+                    "Id": "cognitiveservices",
+                    "Image": "cognitive-services.png"
+                },
+                {
+                    "Title": "SQL Data Warehouse",
+                    "Id": "sqldatawarehouse",
+                    "Image": "sql-datawarehouse.png"
+                },
+                {
+                    "Title": "HDInsight",
+                    "Id": "hdinsight",
+                    "Image": "hdinsight.png"
+                },
+                {
+                    "Title": "Search",
+                    "Id": "search",
+                    "Image": "search.png"
+                },
+                {
+                    "Title": "Bot Framework",
+                    "Id": "bot",
+                    "Image": "bot.png"
+                }
+            ]
+        }
+    ]
+}
