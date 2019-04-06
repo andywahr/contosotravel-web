@@ -15,6 +15,6 @@ jobs:
     inputs:
       addSpnToEnvironment: true    
       azureSubscription: '${{ variables.ConnectedServiceName_local }}'
-      scriptPath: '$(Build.sourcesDirectory)/Terraform/ContosoTravel/LoadTest/deploy.bash'
+      scriptPath: '$(Build.sourcesDirectory)/LoadTest/deploy.bash'
       arguments: '$(namePrefix) $(ResourceGroupName)'
       workingDirectory: $(Build.sourcesDirectory)

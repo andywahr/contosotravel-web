@@ -1,14 +1,15 @@
 {
     "Name": "Contoso Travel",
+    "Description": "Public Web Site example hosted in Azure",
     "TerraformLocation": {
-        "Repo": "https://github.com/andywahr/arkhitekton-modules.git",
+        "Repo": "https://github.com/andywahr/contosotravel-web.git",
         "Branch": "master",
-        "BuildYaml": "Terraform/ContosoTravel/build.yaml"
+        "BuildYaml": "build.yaml"
     },
     "LoadTest": {
-        "Repo": "https://github.com/andywahr/arkhitekton-modules.git",
+        "Repo": "https://github.com/andywahr/contosotravel-web.git",
         "Branch": "master",
-        "BuildYaml": "Terraform/ContosoTravel/loadTestBuild.yaml"
+        "BuildYaml": "loadTestBuild.yaml"
     },
     "DevOpsPlugin": [
         {
@@ -126,8 +127,7 @@
                             "Branch": "master",
                             "BuildYaml": "web-nodejs-build.yaml"
                         }
-                    ],
-                    "GeneralDeployJson": "https://raw.githubusercontent.com/andywahr/arkhitekton-modules/master/ContosoTravel/web/appservice/cd.json"
+                    ]
                 },
                 {
                     "Title": "Kubernetes",
@@ -255,8 +255,7 @@
                             "Branch": "master",
                             "BuildYaml": "services-nodejs-eventGrid.yaml"
                         }
-                    ],
-                    "GeneralDeployJson": "https://raw.githubusercontent.com/andywahr/arkhitekton-modules/master/ContosoTravel/backend/functions/cd.json"
+                    ]
                 },
                 {
                     "Title": "Kubernetes",
