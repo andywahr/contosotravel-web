@@ -27,5 +27,5 @@ Once a ContosoTravel Solution is deployed by [Arkhitekton](https://arkhitekton.a
   * Infrastructure Pipeline - Executes Terraform to deploy Azure Infrastructure and kicks off the Data Loader
   * Web Pipeline - After Infrastructure, Builds and Deploys the selected Web Site
   * Service Pipeline (optional) - After Infrastructure, Builds and Deploys the selected Backend platform (if Monolith is choosen, this is skipped)
-  * LoadTest Pipeline - After Web, Deploys the LoadTest container as [Azure Container Instnace](https://azure.microsoft.com/en-us/services/container-instances/) and runs Load Tests from 3 different US Regions
+  * LoadTest Pipeline - After Web, Deploys the LoadTest (using [Artillery.io](https://artillery.io)) container as [Azure Container Instnace](https://azure.microsoft.com/en-us/services/container-instances/) and runs Load Tests from 3 different US Regions
 * The DataLoader is in the .Net repository, and is repsonsible for configuring the Data choice (create database, deploy schema, permission, run base data load) 
