@@ -8,7 +8,7 @@ ContosoTravel Web for Arkhitekton
 | [Node JS](https://github.com/andywahr/contosotravel-web-nodejs)   | [![Build Status](https://dev.azure.com/contosotravel/Infrastructure/_apis/build/status/andywahr.contosotravel-web-nodejs?branchName=master)](https://dev.azure.com/contosotravel/Infrastructure/_build/latest?definitionId=3&branchName=master)   | 
 | [Load Test](https://github.com/andywahr/contosotravel-web-test) | [![Build Status](https://dev.azure.com/contosotravel/Infrastructure/_apis/build/status/andywahr.contosotravel-web-test?branchName=master)](https://dev.azure.com/contosotravel/Infrastructure/_build/latest?definitionId=4&branchName=master) Artillery.io LoadTest Publish [![Build Status](https://dev.azure.com/contosotravel/Infrastructure/_apis/build/status/test-publisher?branchName=master)](https://dev.azure.com/contosotravel/Infrastructure/_build/latest?definitionId=6&branchName=master) | 
 
-ContosoTravel Web is a simple Travel booking web example hosted in Azure, allowing for the creation of a contextual demonstration for a given environment.  The majority of the application platforms are implemented in atleast .Net Core and Node JS, with some targeted implementations in .Net Full Framework.
+ContosoTravel Web is a simple Travel booking web example hosted in Azure, allowing for the creation of a contextual demonstration for a given environment.  The majority of the application platforms are implemented in atleast .Net Core and Node JS, with some targeted implementations in .Net Full Framework.  Go here for more info on [Arkhitekton](https://github.com/andywahr/arkhitekton).
 
 ![Image of ContosoTravel](./bigPicture.png)
 
