@@ -41,5 +41,5 @@ resource "azurerm_cdn_endpoint" "cdnEndpoint" {
 }
 
 output "webSiteFQDN" {
-  value = "${azurerm_cdn_endpoint.cdnEndpoint.name}.azureedge.net"
+  value = "${element(concat(azurerm_cdn_endpoint.cdnEndpoint.*.name, list("")), 0)}.azureedge.net"
 }

@@ -13,7 +13,7 @@ jobs:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in override.tf'
     inputs:
-      rootDirectory: Terraform/ContosoTravel
+      rootDirectory: $(Build.sourcesDirectory)
       targetFiles: override.tf
      
   - task: AzureCLI@1
@@ -21,7 +21,7 @@ jobs:
     inputs:
       addSpnToEnvironment: true    
       azureSubscription: '${{ variables.ConnectedServiceName_local }}'
-      scriptPath: '$(Build.sourcesDirectory)/Terraform/ContosoTravel/deploy.bash'
+      scriptPath: '$(Build.sourcesDirectory)/deploy.bash'
       arguments: '$servicePrincipalId $servicePrincipalKey'
       workingDirectory: $(Build.sourcesDirectory)
 
