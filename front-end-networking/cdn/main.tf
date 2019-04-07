@@ -20,7 +20,7 @@ variable "enabled" {
 
 resource "azurerm_cdn_profile" "cdn" {
   name                = "cdn-${var.namePrefix}"
-  location            = "${var.location}"
+  location            = "northcentralus"
   resource_group_name = "${var.resourceGroupName}"
   sku                 = "Standard_Microsoft"
   count               = "${var.enabled == "true" ? 1 : 0}"
@@ -29,7 +29,7 @@ resource "azurerm_cdn_profile" "cdn" {
 resource "azurerm_cdn_endpoint" "cdnEndpoint" {
   name                   = "cdn-contosotravel-${lower(var.namePrefix)}"
   profile_name           = "${azurerm_cdn_profile.cdn.name}"
-  location               = "${var.location}"
+  location               = "northcentralus"
   resource_group_name    = "${var.resourceGroupName}"
   count                  = "${var.enabled == "true" ? 1 : 0}"
   optimization_type      = "GeneralWebDelivery"
