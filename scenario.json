@@ -1,7 +1,7 @@
 {
     "Name": "Contoso Travel",
     "Description": "Public Web Site example hosted in Azure",
-    "TerraformLocation": {
+    "InfrastructureLocation": {
         "Repo": "https://github.com/andywahr/contosotravel-web.git",
         "Branch": "master",
         "BuildYaml": "build.yaml"
