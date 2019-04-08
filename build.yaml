@@ -8,6 +8,7 @@ jobs:
 
   variables:
     ConnectedServiceName_local: $(ConnectedServiceName)
+    ContainerName_local: $(ContainerName)
 
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
@@ -25,3 +26,11 @@ jobs:
       arguments: '$servicePrincipalId $servicePrincipalKey'
       workingDirectory: $(Build.sourcesDirectory)
 
+  - task: AzureFileCopy@2
+    displayName: 'AzureBlob File Copy'
+    inputs:
+      SourcePath: terraform_output.txt
+      azureSubscription: '${{ variables.ConnectedServiceName_local }}'
+      Destination: AzureBlob
+      storage: storarkhitektondev
+      ContainerName: ${{ variables.ContainerName_local }}

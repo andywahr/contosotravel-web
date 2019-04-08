@@ -620,3 +620,23 @@ resource "azurerm_key_vault_access_policy" "aciKeyVaultPolicy" {
     "list",
   ]
 }
+
+output "Web Site Address" {
+  value = "${var.cdn == "true" ? module.cdn.webSiteFQDN : (var.trafficmanager == "true" ? module.trafficManager.webSiteFQDN : (var.appgateway == "true" ? module.appGateway.webSiteFQDN : module.webSite.webSiteFQDN))}"
+}
+
+output "CDN Address" {
+  value = "${var.cdn == "true" ? module.cdn.webSiteFQDN : ""}"
+}
+
+output "Traffic Manager Address" {
+  value = "${var.trafficmanager == "true" ? module.trafficManager.webSiteFQDN : ""}"
+}
+
+output "Application Gateway Address" {
+  value = "${var.appgateway == "true" ? module.appGateway.webSiteFQDN : ""}"
+}
+
+output "Hosted Web Site Address" {
+  value = "${module.webSite.webSiteFQDN}"
+}
