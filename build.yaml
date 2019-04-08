@@ -23,14 +23,5 @@ jobs:
       addSpnToEnvironment: true    
       azureSubscription: '${{ variables.ConnectedServiceName_local }}'
       scriptPath: '$(Build.sourcesDirectory)/deploy.bash'
-      arguments: '$servicePrincipalId $servicePrincipalKey'
+      arguments: '${{ variables.ContainerName_local }}'
       workingDirectory: $(Build.sourcesDirectory)
-
-  - task: AzureFileCopy@2
-    displayName: 'AzureBlob File Copy'
-    inputs:
-      SourcePath: terraform_output.txt
-      azureSubscription: '${{ variables.ConnectedServiceName_local }}'
-      Destination: AzureBlob
-      storage: storarkhitektondev
-      ContainerName: ${{ variables.ContainerName_local }}

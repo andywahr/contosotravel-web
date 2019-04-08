@@ -6,4 +6,5 @@ export ARM_TENANT_ID=$(az account show --query tenantId | tr -d '"')
 terraform init 
 terraform plan 
 terraform apply -auto-approve
-terraform output > .\terraform_output.txt
+terraform output > ./terraform_output.txt
+az storage blob upload --file ./terraform_output.txt --container-name $1 --name terraform_output.txt --account-name storarkhitektondev
