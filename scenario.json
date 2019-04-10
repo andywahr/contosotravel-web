@@ -11,14 +11,11 @@
         "Branch": "master",
         "BuildYaml": "loadTestBuild.yaml"
     },
-    "DevOpsPlugin": [
-        {
-            "Publisher": "petergroenewegen",
-            "Id": "PeterGroenewegen-Xpirit-Vsts-Release-Terraform"
-        },
+    "DevOpsPlugins": [
         {
             "Publisher": "qetza",
-            "Id": "replacetokens"
+            "Id": "replacetokens",
+            "Version: 3
         }
     ],
     "Categories": [
