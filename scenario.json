@@ -26,7 +26,7 @@
             "Services": [
                 {
                     "Title": "Azure DevOps",
-                    "Image": "vs.png",
+                    "Image": "devops.png",
                     "Id": "vsts",
                     "IsAvailable": true
                 },
