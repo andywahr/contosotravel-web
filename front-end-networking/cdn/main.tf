@@ -27,12 +27,13 @@ resource "azurerm_cdn_profile" "cdn" {
 }
 
 resource "azurerm_cdn_endpoint" "cdnEndpoint" {
-  name                   = "cdn-contosotravel-${lower(var.namePrefix)}"
-  profile_name           = "${azurerm_cdn_profile.cdn.name}"
-  location               = "northcentralus"
-  resource_group_name    = "${var.resourceGroupName}"
-  count                  = "${var.enabled == "true" ? 1 : 0}"
-  optimization_type      = "GeneralWebDelivery"
+  name                = "cdn-contosotravel-${lower(var.namePrefix)}"
+  profile_name        = "${azurerm_cdn_profile.cdn.name}"
+  location            = "northcentralus"
+  resource_group_name = "${var.resourceGroupName}"
+  count               = "${var.enabled == "true" ? 1 : 0}"
+  optimization_type   = "GeneralWebDelivery"
+  origin_host_header  = "${var.webSiteFQDN}"
 
   origin {
     name      = "contosoTravel"

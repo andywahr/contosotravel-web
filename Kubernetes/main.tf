@@ -122,7 +122,7 @@ resource "azurerm_role_assignment" "aksACRRoleAssignmentWrite" {
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/${azurerm_container_registry.acr.name}"
   role_definition_name = "AcrPush"
   principal_id         = "${data.azurerm_client_config.current.service_principal_object_id}"
-  count             = "${var.standalone == "true" ? 1 : 0}"
+  count                = "${var.standalone == "true" ? 1 : 0}"
 }
 
 # Create managed Kubernetes cluster (AKS)
@@ -160,7 +160,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin = "azure"
   }
-  count             = "${var.standalone == "true" ? 1 : 0}"
+
+  role_based_access_control {
+    enabled = "false"
+  }
+
+  count = "${var.standalone == "true" ? 1 : 0}"
 }
 
 resource "azurerm_log_analytics_solution" "ContainerInsights" {
@@ -174,7 +179,8 @@ resource "azurerm_log_analytics_solution" "ContainerInsights" {
     publisher = "Microsoft"
     product   = "OMSGallery/ContainerInsights"
   }
-  count             = "${var.standalone == "true" ? 1 : 0}"
+
+  count = "${var.standalone == "true" ? 1 : 0}"
 }
 
 resource "azurerm_key_vault_access_policy" "kubKeyVaultPolicy" {
@@ -187,7 +193,8 @@ resource "azurerm_key_vault_access_policy" "kubKeyVaultPolicy" {
     "get",
     "list",
   ]
-  count             = "${var.standalone == "true" ? 1 : 0}"
+
+  count = "${var.standalone == "true" ? 1 : 0}"
 }
 
 resource "azurerm_key_vault_secret" "serviceFQDN" {
@@ -198,5 +205,5 @@ resource "azurerm_key_vault_secret" "serviceFQDN" {
 }
 
 output "DNSZone" {
-  value = "${var.standalone != "true" ? "" : element(concat(azurerm_kubernetes_cluster.aks.*.addon_profile.0.http_application_routing.0.http_application_routing_zone_name, list("")), 0)}"  
+  value = "${var.standalone != "true" ? "" : element(concat(azurerm_kubernetes_cluster.aks.*.addon_profile.0.http_application_routing.0.http_application_routing_zone_name, list("")), 0)}"
 }
