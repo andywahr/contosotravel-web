@@ -10,7 +10,19 @@ param
       $namePrefix,
 
       [Parameter(Mandatory=$true)]
-      $pathToDeploy
+      $pathToDeploy,
+
+      [Parameter(Mandatory=$true)]
+      $buildId,
+      
+      [Parameter(Mandatory=$true)]
+      $deployName,
+            
+      [Parameter(Mandatory=$true)]
+      $serviceName,
+           
+      [Parameter(Mandatory=$true)]
+      $containerName
 )
 
 "Get Credentials"
@@ -55,4 +67,5 @@ kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/maste
 kubectl apply -f "$PSScriptRoot/init.yaml"
 
 kubectl apply -f $pathToDeploy
+kubectl set image ("deployments/$deployName") ("${serviceName}=acrContosoTravel${namePrefix}.azurecr.io/${containerName}:${buildId}")
 

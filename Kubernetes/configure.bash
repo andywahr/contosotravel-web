@@ -2,9 +2,9 @@ rg=$1
 sub=$2
 namePrefix=$3
 pathToDeploy=$4
+buildId=$5
+deployName=$6
+containerName=$7
+serviceName=$8
 
-if [ $# -eq 5 ]; then
-   includeNginx="-includeNginx"
-fi
-
-pwsh ./configure.ps1 -rg $rg -sub $sub -namePrefix $namePrefix -pathToDeploy $pathToDeploy $includeNginx
+pwsh ./configure.ps1 -rg $rg -sub $sub -namePrefix $namePrefix -pathToDeploy $pathToDeploy $buildId $deployName $containerName $serviceName
