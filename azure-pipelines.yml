@@ -10,6 +10,12 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens in override.tf'
+  inputs:
+    rootDirectory: $(Build.sourcesDirectory)
+    targetFiles: override.tf
+    
 - script: |
     terraform init
   displayName: 'Verify basic terraform syntax'
