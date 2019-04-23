@@ -7,22 +7,7 @@ param
       $sub,
       
       [Parameter(Mandatory=$true)]
-      $namePrefix,
-
-      [Parameter(Mandatory=$true)]
-      $pathToDeploy,
-
-      [Parameter(Mandatory=$true)]
-      $buildId,
-      
-      [Parameter(Mandatory=$true)]
-      $deployName,
-            
-      [Parameter(Mandatory=$true)]
-      $serviceName,
-           
-      [Parameter(Mandatory=$true)]
-      $containerName
+      $namePrefix
 )
 
 "Get Credentials"
@@ -39,15 +24,18 @@ $dnsZone = (az aks show --resource-group $rg --subscription $sub --name ("aks-Co
 "Get Info serviceConnStr Resource Group - dnsZone"
 $serviceConnStr = ((az keyvault secret show --subscription $sub --vault-name "kv$namePrefix" --name "ContosoTravel--EventingConnectionString" --query value).Replace('"', '')) -replace ";EntityPath.+", ""
 
-# Get the id of the service principal configured for AKS
+# Get the id of the service principal configured for AKS and Resource Id
 $CLIENT_ID=(az aks show --resource-group $rg --subscription $sub --name ("aks-ContosoTravel-" + $namePrefix) --query "servicePrincipalProfile.clientId" --output tsv)
+$RESOURCE_ID=(az aks show --resource-group $rg --subscription $sub --name ("aks-ContosoTravel-" + $namePrefix) --query "id" --output tsv)
 
 # Get the ACR registry resource id
 $ACR_ID=$(az acr show --name ("acrContosoTravel" + $namePrefix) --resource-group $rg --subscription $sub --query "id" --output tsv)
 
-# Create role assignment
+# Create role assignment to pull container
 az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
 
+# Create role assignment to public Monitoring Metrics
+az role assignment create --assignee $CLIENT_ID --role "Monitoring Metrics Publisher" --scope $RESOURCE_ID
 
 function replaceInFiles([string]$fileName) {
   $contents = get-content $fileName | out-string
@@ -66,6 +54,4 @@ replaceInFiles $pathToDeploy
 kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml
 kubectl apply -f "$PSScriptRoot/init.yaml"
 
-kubectl apply -f $pathToDeploy
-kubectl set image ("deployments/$deployName") ("${serviceName}=acrContosoTravel${namePrefix}.azurecr.io/${containerName}:${buildId}")
 

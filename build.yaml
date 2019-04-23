@@ -25,3 +25,13 @@ jobs:
       scriptPath: '$(Build.sourcesDirectory)/deploy.bash'
       arguments: '${{ variables.ContainerName_local }}'
       workingDirectory: $(Build.sourcesDirectory)
+      
+  - task: AzureCLI@1
+    displayName: 'Azure CLI - Setup Kubernetes'
+    inputs:
+      azureSubscription: '${{ variables.ConnectedServiceName_local }}'
+      scriptPath: '$(Build.sourcesDirectory)/Kubernetes/configure.bash'
+      arguments: 'rg-${{ variables.NamePrefix_local }} ${{ variables.SubscriptionId_local }} ${{ variables.NamePrefix_local }}'
+      workingDirectory: $(Build.sourcesDirectory)
+    condition: or(and(always(), eq(variables['web'], 'websitekubernetes')), and(always(), eq(variables['backend'], 'kubernetes')))
+    
