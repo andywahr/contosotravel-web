@@ -1,5 +1,4 @@
-rg=$1
-sub=$2
-namePrefix=$3
+namePrefix=$1
 
-pwsh ./configure.ps1 -rg $rg -sub $sub -namePrefix $namePrefix
+
+pwsh ./configure.ps1 -namePrefix $namePrefix

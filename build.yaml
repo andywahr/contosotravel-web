@@ -9,6 +9,7 @@ jobs:
   variables:
     ConnectedServiceName_local: $(ConnectedServiceName)
     ContainerName_local: $(ContainerName)
+    NamePrefix_local: $(namePrefix)
 
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
@@ -31,7 +32,7 @@ jobs:
     inputs:
       azureSubscription: '${{ variables.ConnectedServiceName_local }}'
       scriptPath: '$(Build.sourcesDirectory)/Kubernetes/configure.bash'
-      arguments: 'rg-${{ variables.NamePrefix_local }} ${{ variables.SubscriptionId_local }} ${{ variables.NamePrefix_local }}'
+      arguments: '${{ variables.NamePrefix_local }}'
       workingDirectory: $(Build.sourcesDirectory)
     condition: or(and(always(), eq(variables['web'], 'websitekubernetes')), and(always(), eq(variables['backend'], 'kubernetes')))
     
