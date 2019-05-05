@@ -131,7 +131,7 @@
                     "Id": "websitekubernetes",
                     "Image": "kubernetes.png",
                     "IsAvailable": true,
-                    "RequiresServicePricinpal": true,
+                    "RequireAzureADApplication": true,
                     "Platforms": [
                         {
                             "Title": ".Net Core",
@@ -153,12 +153,26 @@
                     "Title": "Web Site (IaaS)",
                     "Id": "websiteiaas",
                     "Image": "vm.png",
-                    "IsAvailable": false
-                },
-                {
-                    "Title": "Service Fabric",
-                    "Id": "websiteservicefabric",
-                    "Image": "service-fabric.png"
+                    "IsAvailable": true,
+                    "DeploymentGroupName": "web",
+                    "Platforms": [
+                        {
+                            "Title": ".Net Core",
+                            "Id": "websiteiaascore",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-dotnet.git",
+                            "Branch": "master",
+                            "BuildYaml": "src/web-core-kubernetes.yaml",
+                            "BuildPool": "Hosted Windows 2019 with VS2019"
+                        },
+                        {
+                            "Title": "Node JS",
+                            "Id": "websiteiaasnode",
+                            "Repo": "https://github.com/andywahr/contosotravel-web-nodejs.git",
+                            "Branch": "master",
+                            "BuildYaml": "/build-web-container.yaml",
+                            "BuildPool": "Hosted Ubuntu 1604"
+                        }
+                    ]
                 }
             ]
         },
@@ -259,6 +273,7 @@
                     "Id": "kubernetes",
                     "Image": "kubernetes.png",
                     "IsAvailable": true,
+                    "RequireAzureADApplication": true,                    
                     "Platforms": [
                         {
                             "Title": ".Net Core",
@@ -314,11 +329,6 @@
                     "Title": "Services (IaaS)",
                     "Id": "servicesiaas",
                     "Image": "vm.png"
-                },
-                {
-                    "Title": "Service Fabric",
-                    "Id": "servicesservicefabric",
-                    "Image": "service-fabric.png"
                 }
             ]
         },
